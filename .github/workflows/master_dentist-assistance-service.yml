@@ -11,6 +11,7 @@ on:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  APP_PATH: starter/ContosoDentistryChatBot
 
 jobs:
   build:
@@ -27,6 +28,7 @@ jobs:
           node-version: '22.x'
 
       - name: npm install, build, and test
+        working-directory: ${{ env.APP_PATH }}
         run: |
           npm install
           npm run build --if-present
@@ -36,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: ${{ env.APP_PATH }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -50,6 +52,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
+          path: node-app
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -64,5 +67,5 @@ jobs:
         with:
           app-name: 'dentist-assistance-service'
           slot-name: 'Production'
-          package: .
+          package: ./node-app
           

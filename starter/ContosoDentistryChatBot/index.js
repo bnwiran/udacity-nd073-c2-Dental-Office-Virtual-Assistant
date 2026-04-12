@@ -15,7 +15,7 @@ const restify = require('restify');
 const { BotFrameworkAdapter } = require('botbuilder');
 
 // This bot's main dialog.
-const { DentaBot } = require('./bot');
+const { DentistBot } = require('./bot');
 
 // Create HTTP server
 const server = restify.createServer();
@@ -57,9 +57,9 @@ adapter.onTurnError = onTurnErrorHandler;
 
 // Map configuration values values from .env file into the required format for each service.
 const QnAConfiguration = {
-    knowledgeBaseId: process.env.QnAKnowledgebaseId,
-    endpointKey: process.env.QnAAuthKey,
-    host: process.env.QnAEndpointHostName
+    knowledgeBaseId: process.env.ProjectName,
+    endpointKey: process.env.OcpApimSubscriptionKey,
+    host: process.env.HostName
 };
 
 const LuisConfiguration = {
@@ -79,12 +79,13 @@ const configuration = {
 }
 
 // Create the main dialog.
-const myBot = new DentaBot(configuration, {});
+const myBot = new DentistBot(configuration, {});
 
 // Listen for incoming requests.
-server.post('/api/messages', (req, res) => {
-    adapter.processActivity(req, res, async (context) => {
+server.post('/api/messages', async (req, res) => {
+    await adapter.processActivity(req, res, async (context) => {
         // Route to main dialog.
+        console.log('req.body', req.body);
         await myBot.run(context);
     });
 });

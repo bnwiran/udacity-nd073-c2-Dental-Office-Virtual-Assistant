@@ -15,6 +15,9 @@
         "type": "git",
         "url": "https://github.com"
     },
+    "engines": {
+        "node": ">=22 <23"
+    },
     "dependencies": {
         "botbuilder": "~4.11.0",
         "botbuilder-ai": "^4.23.3",

@@ -19,10 +19,9 @@
         "node": ">=22 <23"
     },
     "dependencies": {
-        "botbuilder": "~4.11.0",
-        "botbuilder-ai": "^4.23.3",
+        "botbuilder": "~4.23.0",
         "dotenv": "^8.2.0",
-        "restify": "^11.1.0"
+        "restify": "~10.0.0"
     },
     "devDependencies": {
         "eslint": "^7.0.0",

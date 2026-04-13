@@ -101,7 +101,7 @@ class DentistBot extends ActivityHandler {
             const welcomeText =
                 'Hello and welcome to Contoso Dentistry! ' +
                 'I can help you schedule appointments, check availability, ' +
-                'or answer questions about our office. How can I help you today?';
+                'or answer questions about our office. How can I help you today? :)';
 
             for (let cnt = 0; cnt < membersAdded.length; ++cnt) {
                 if (membersAdded[cnt].id !== context.activity.recipient.id) {
